@@ -24,7 +24,7 @@ function SignUp() {
           placeholder="PASSWORD"
           id="password"
         />
-        <button className="border text-lg p-3 rounded-lg text-white bg-lime-700">
+        <button className="border text-lg p-3 rounded-lg text-white bg-lime-700 hover:bg-lime-600 active:bg-red-950">
           {" "}
           SIGN-UP
         </button>
