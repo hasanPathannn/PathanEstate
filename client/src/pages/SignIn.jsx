@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { signInFailure, signInSuccess } from "../redux/user/userSlice";
 
 function SignIn() {
   const [signInData, setsignInData] = useState({});
-  const [err, setErr] = useState(null);
+  const { error } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleInput = (e) => {
@@ -25,14 +28,13 @@ function SignIn() {
       const data = await res.json();
       console.log(data);
       if (data.success === false) {
-        setErr(data.message);
-        console.log("Its working");
+        dispatch(signInFailure(data.message));
         return;
       }
-      setErr(null);
+      dispatch(signInSuccess(data));
       navigate("/");
-    } catch (err) {
-      setErr(err.message);
+    } catch (error) {
+      dispatch(signInFailure(error.message));
     }
 
     console.log("Sumit button is clicked");
@@ -72,7 +74,7 @@ function SignIn() {
         </Link>
       </div>
 
-      <div className="text-red-700 px-6 my-2">{err && <p>{err}</p>}</div>
+      <div className="text-red-700 px-6 my-2">{error && <p>{error}</p>}</div>
     </div>
   );
 }
