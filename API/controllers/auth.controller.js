@@ -19,16 +19,16 @@ export const signUp = async (req, res, next) => {
   console.log(req.body);
 };
 
-export const singIn = async (req, res, next) => {
+export const signIn = async (req, res, next) => {
   const { password, email } = req.body;
   try {
     const validUser = await User.findOne({ email });
     if (!validUser) {
-      errorHandler(404, "USER NOT FOUND");
+      return next(errorHandler(400, "USER NOT FOUND"));
     }
     const validPass = bcrypt.compareSync(password, validUser.password);
     if (!validPass) {
-      errorHandler(404, "INVALID CREDENTIALS");
+      return next(errorHandler(404, "INVALID CREDENTIALS"));
     }
 
     const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);
@@ -37,7 +37,7 @@ export const singIn = async (req, res, next) => {
       .status(201)
       .cookie("Token", token, {
         httpOnly: true,
-        expires: new Date(Date.now() + 24 * 36000 * 1000),
+        // expires: new Date(Date.now() + 24 * 36000 * 1000),
       })
       .json(rest);
   } catch (err) {
