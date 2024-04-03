@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import OAuth from "../components/OAuth";
 
 function SignUp() {
   const [signUpData, setsignUpData] = useState({});
@@ -69,6 +70,7 @@ function SignUp() {
           {" "}
           SIGN-UP
         </button>
+        <OAuth />
       </form>
 
       <div className="flex gap-2 px-6">
@@ -77,7 +79,7 @@ function SignUp() {
           <span className="text-blue-600">Sign-in</span>
         </Link>
       </div>
-      <OAuth />
+
       <div className="text-red-700 px-6 my-2">{err && <p>{err}</p>}</div>
     </div>
   );
