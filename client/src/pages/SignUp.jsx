@@ -77,7 +77,7 @@ function SignUp() {
           <span className="text-blue-600">Sign-in</span>
         </Link>
       </div>
-
+      <OAuth />
       <div className="text-red-700 px-6 my-2">{err && <p>{err}</p>}</div>
     </div>
   );
