@@ -5,8 +5,6 @@ import Profile from "../pages/Profile";
 
 const PrivateRoute = () => {
   const { currUser } = useSelector((state) => state.user);
-  console.log(currUser);
-
   return currUser ? <Outlet /> : <Navigate to="/sign-in" />;
 };
 
