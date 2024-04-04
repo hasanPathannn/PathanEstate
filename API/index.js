@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import userRouter from "./routes/user.route.js";
 import userAuth from "./routes/auth.route.js";
-
+import cookieParser from "cookie-parser";
 dotenv.config();
 
 mongoose
@@ -15,6 +15,7 @@ const app = express();
 
 //it will return json object inside body without it we wont be able to use req.body
 app.use(express.json());
+app.use(cookieParser());
 
 app.listen(5000, () => {
   console.log("Server is runnig");
