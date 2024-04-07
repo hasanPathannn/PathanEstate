@@ -97,12 +97,27 @@ function Profile() {
       const data = res.json();
       if (data.success === false) {
         dispatch(userDeleteFailure(data.message));
+        return;
       }
       dispatch(userDeleteSuccess());
     } catch (err) {
       dispatch(userDeleteFailure(err.message));
     }
     console.log("handleDelete");
+  };
+
+  const handleSignOut = async () => {
+    try {
+      const res = await fetch("/api/auth/sign-out");
+      const data = res.json();
+      if (data.success === false) {
+        dispatch(userDeleteFailure(data.message));
+        return;
+      }
+      dispatch(userDeleteSuccess(data));
+    } catch (err) {
+      dispatch(userDeleteFailure(err.message));
+    }
   };
 
   return (
@@ -181,6 +196,7 @@ function Profile() {
       </button>
 
       <button
+        onClick={handleSignOut}
         type="button"
         className="border text-lg w-full p-3 rounded-lg text-white bg-neutral-600 hover:bg-lime-600 active:bg-red-950"
       >
