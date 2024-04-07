@@ -8,7 +8,12 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 import { app } from "../firebase";
-import { updateUserFailure, updateUserSuccess } from "../redux/user/userSlice";
+import {
+  updateUserFailure,
+  updateUserSuccess,
+  userDeleteFailure,
+  userDeleteSuccess,
+} from "../redux/user/userSlice";
 
 function Profile() {
   const fileRef = useRef(null);
@@ -84,6 +89,22 @@ function Profile() {
     }
   };
 
+  const handleDelete = async () => {
+    try {
+      const res = await fetch(`/api/user/delete/${currUser._id}`, {
+        method: "DELETE",
+      });
+      const data = res.json();
+      if (data.success === false) {
+        dispatch(userDeleteFailure(data.message));
+      }
+      dispatch(userDeleteSuccess());
+    } catch (err) {
+      dispatch(userDeleteFailure(err.message));
+    }
+    console.log("handleDelete");
+  };
+
   return (
     <div className="max-w-lg mx-auto">
       <h1 className="font-bold text-2xl text-center my-8">PROFILE</h1>
@@ -152,6 +173,7 @@ function Profile() {
 
       <button
         type="button"
+        onClick={handleDelete}
         className="border text-lg w-full p-3 rounded-lg text-white bg-red-900 hover:bg-lime-600 active:bg-red-950"
       >
         {" "}

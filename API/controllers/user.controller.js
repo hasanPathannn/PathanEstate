@@ -40,3 +40,18 @@ export const updateUser = async (req, res, next) => {
     next(error);
   }
 };
+
+export const userDelete = async (req, res, next) => {
+  if (req.user.id !== req.params.id) {
+    return next(errorHandler(402, "You cant delete others account!"));
+  }
+  try {
+    await User.findByIdAndDelete(req.params.id);
+    res.clearCookie("Token");
+    res.status(200).json({ message: "User has been deleted Successfully" });
+  } catch (err) {
+    next(err);
+  }
+
+  console.log("Checking userDeletion");
+};
