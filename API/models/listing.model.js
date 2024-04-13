@@ -46,7 +46,7 @@ const listingSchema = moongose.Schema(
       type: String,
       required: true,
     },
-    imageURLS: {
+    imageUrls: {
       type: Array,
       required: true,
     },
