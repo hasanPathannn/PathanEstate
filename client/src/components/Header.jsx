@@ -6,33 +6,39 @@ import { useSelector } from "react-redux";
 const Header = () => {
   const { currUser } = useSelector((state) => state.user);
   return (
-    <header className="bg-lime-200 shadow-md">
+    <header className="bg-black shadow-md">
       <div className="flex justify-between items-center max-w-7xl mx-auto p-3">
         <Link to="/">
-          <h1 className="font-bold text-sm sm:text-xl flex flex-wrap ">
-            <span className="text-lime-500">Pathan</span>
-            <span className="text-lime-700">Estate</span>
+          <h1 className="font-bold text-sm sm:text-xl flex  ">
+            <span className="text-white">Pathan</span>
+            <span className="text-orange-500">Estate</span>
           </h1>
         </Link>
-        <form className="bg-lime-100 p-3 rounded-lg flex items-center">
+        <form className="bg-white p-3 rounded-lg flex items-center">
           <input
             type="text"
             placeholder="Search...."
             className="bg-transparent focus:outline-none w-24 sm:w-64"
           />
           <FaSearch
-            className="text-lime-700 hover:cursor-pointer hover:text-orange-400
+            className="text-black hover:cursor-pointer hover:text-orange-500
           "
           />
         </form>
         <ul className="flex gap-4 items-center">
+          <Link to="/create-listing">
+            {" "}
+            <button className=" text-sm sm:text-base sm:px-5 border bg-black ml-4 text-white py-2 px-4 rounded-xl  hover:text-orange-500 hover:cursor-pointer active:border-orange-500 ">
+              Post
+            </button>
+          </Link>
           <Link to="/">
-            <li className="hidden sm:inline text-lime-700 hover:text-orange-400 hover:cursor-pointer">
+            <li className="hidden sm:inline text-white hover:text-orange-400 hover:cursor-pointer">
               Home
             </li>
           </Link>
           <Link to="/about">
-            <li className="hidden sm:inline text-lime-700 hover:text-orange-400 hover:cursor-pointer">
+            <li className="hidden sm:inline text-white hover:text-orange-400 hover:cursor-pointer">
               About
             </li>
           </Link>
@@ -44,7 +50,7 @@ const Header = () => {
                 alt="Profile"
               />
             ) : (
-              <li className="text-lime-700 hover:text-orange-400 hover:cursor-pointer">
+              <li className="text-white hover:text-orange-400 hover:cursor-pointer">
                 Sign in
               </li>
             )}

@@ -7,6 +7,7 @@ import SighUp from "./pages/SignUp";
 import Home from "./pages/Home";
 import Header from "./components/Header";
 import PrivateRoute from "./components/privateRoute";
+import CreateListing from "./pages/CreateListing";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
         <Route path="/sign-up" element={<SighUp />} />
         <Route element={<PrivateRoute />}>
           <Route path="/profile" element={<Profile />} />
+          <Route path="/create-listing" element={<CreateListing />} />
         </Route>
       </Routes>
     </BrowserRouter>
