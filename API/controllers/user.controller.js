@@ -1,6 +1,7 @@
 import { errorHandler } from "../utils/error.js";
 import User from "../models/user.model.js";
 import bcrypt from "bcrypt";
+import Listing from "../models/listing.model.js";
 
 export const test = (req, res) => {
   res.json({
@@ -54,4 +55,19 @@ export const userDelete = async (req, res, next) => {
   }
 
   console.log("Checking userDeletion");
+};
+
+export const userListing= async(req,res,next)=>{
+  if(req.user.id===req.params.id){
+    try{
+    const listings = await Listing.find({userRef:req.params.id});
+    res.status(200).json(listings);
+  }
+    catch(err){
+      next(err);
+    }
+  }
+  else{
+    return next(errorHandler(401,"Can't Show others listing here!"));
+  }
 };
