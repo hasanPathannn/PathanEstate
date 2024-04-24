@@ -43,7 +43,7 @@ const UserListing = () => {
             >
               <div
                 key={listing._id}
-                className="overflow-hidden rounded-lg border border-gray-100 bg-white shadow-sm dark:border-gray-800 dark:bg-gray-900 dark:shadow-gray-700/25"
+                className="overflow-hidden rounded-lg border border-gray-100 bg-white shadow-sm dark:border-gray-800 dark:bg-black dark:shadow-gray-700/25"
               >
                 <img
                   src={listing.imageUrls[0]}
