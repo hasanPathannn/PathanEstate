@@ -86,9 +86,11 @@ const UserListing = () => {
                         Delete
                       </button>
                     </Link>
-                    <button className="p-2 px-4 border-solid bg-green-800 rounded-lg hover:opacity-80 active:text-gray-900">
-                      Edit
-                    </button>
+                    <Link to={`/update-listing/${listing._id}`}>
+                      <button className="p-2 px-4 border-solid bg-green-800 rounded-lg hover:opacity-80 active:text-gray-900">
+                        Edit
+                      </button>
+                    </Link>
                   </div>
                 </div>
               </div>
