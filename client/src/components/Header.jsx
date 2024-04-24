@@ -6,8 +6,8 @@ import { useSelector } from "react-redux";
 const Header = () => {
   const { currUser } = useSelector((state) => state.user);
   return (
-    <header className="bg-black shadow-md">
-      <div className="flex justify-between items-center max-w-7xl mx-auto p-3">
+    <header className="bg-black shadow-md mb-1">
+      <div className="flex justify-between items-center max-w-7xl mx-auto p-3 ">
         <Link to="/">
           <h1 className="font-bold text-sm sm:text-xl flex  ">
             <span className="text-white">Pathan</span>
@@ -32,9 +32,15 @@ const Header = () => {
               Post
             </button>
           </Link>
+
           <Link to="/">
             <li className="hidden sm:inline text-white hover:text-orange-400 hover:cursor-pointer">
               Home
+            </li>
+          </Link>
+          <Link to="/user-Listing">
+            <li className="hidden sm:inline text-white hover:text-orange-400 hover:cursor-pointer">
+              Listing
             </li>
           </Link>
           <Link to="/about">
