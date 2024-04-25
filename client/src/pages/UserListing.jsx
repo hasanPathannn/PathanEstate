@@ -52,16 +52,16 @@ const UserListing = () => {
       <p className="text-red-700 mt-5">
         {showListingsError ? "Error showing listings" : ""}
       </p>
-
+      <h1 className="text-center text-2xl text-black">Your Listing</h1>
       {userListings && userListings.length > 0 && (
-        <div className="flex flex-row gap-2 justify-around">
+        <div className="flex flex-row gap-3 px-2 justify-around flex-wrap">
           {userListings.map((listing) => (
             <Link
               key={listing._id}
-              className="text-slate-700 font-semibold flex-1"
+              className="text-slate-700 font-semibold w-4/12 h-4/12  flex-auto flex-wrap"
               to={`/listing/${listing._id}`}
             >
-              <div className="overflow-hidden rounded-lg border border-gray-100 bg-white shadow-sm dark:border-gray-800 dark:bg-black dark:shadow-gray-700/25">
+              <div className="overflow-hidden rounded-lg border border-gray-100 bg-white shadow-sm dark:border-gray-800 dark:bg-slate-900 dark:shadow-gray-700/25">
                 <img
                   src={listing.imageUrls[0]}
                   alt="listing cover"
