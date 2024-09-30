@@ -23,14 +23,14 @@ export default function App() {
         <Route path='/search' element={<Search />} />
         <Route path='/listing/:listingId' element={<Listing />} />
 
-        <Routes element={<PrivateRoute />}>
+        <Route element={<PrivateRoute />}>
           <Route path='/profile' element={<Profile />} />
           <Route path='/create-listing' element={<CreateListing />} />
           <Route
             path='/update-listing/:listingId'
             element={<UpdateListing />}
           />
-        </Routes>
+        </Route>
       </Routes>
     </BrowserRouter>
   );
