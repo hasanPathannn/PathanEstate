@@ -1,6 +1,6 @@
-import moongose from "mongoose";
+import mongoose from 'mongoose';
 
-const listingSchema = moongose.Schema(
+const listingSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -18,15 +18,15 @@ const listingSchema = moongose.Schema(
       type: Number,
       required: true,
     },
-    discountedPrice: {
-      type: Number,
-      required: true,
-    },
-    bedrooms: {
+    discountPrice: {
       type: Number,
       required: true,
     },
     bathrooms: {
+      type: Number,
+      required: true,
+    },
+    bedrooms: {
       type: Number,
       required: true,
     },
@@ -38,12 +38,12 @@ const listingSchema = moongose.Schema(
       type: Boolean,
       required: true,
     },
-    offer: {
-      type: Boolean,
-      required: true,
-    },
     type: {
       type: String,
+      required: true,
+    },
+    offer: {
+      type: Boolean,
       required: true,
     },
     imageUrls: {
@@ -58,6 +58,6 @@ const listingSchema = moongose.Schema(
   { timestamps: true }
 );
 
-const Listing = moongose.model("Listing", listingSchema);
+const Listing = mongoose.model('Listing', listingSchema);
 
 export default Listing;

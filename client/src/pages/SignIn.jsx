@@ -1,30 +1,34 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { signInFailure, signInSuccess } from "../redux/user/userSlice";
-import OAuth from "../components/OAuth";
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  signInStart,
+  signInSuccess,
+  signInFailure,
+} from '../redux/user/userSlice';
+import OAuth from '../components/OAuth';
 
-function SignIn() {
-  const [signInData, setsignInData] = useState({});
-  const { error } = useSelector((state) => state.user);
-  const dispatch = useDispatch();
+export default function SignIn() {
+  const [formData, setFormData] = useState({});
+  const { loading, error } = useSelector((state) => state.user);
   const navigate = useNavigate();
-
-  const handleInput = (e) => {
-    setsignInData({ ...signInData, [e.target.id]: e.target.value });
-    console.log(signInData);
+  const dispatch = useDispatch();
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.id]: e.target.value,
+    });
   };
-
-  const handleOnSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
-      const res = await fetch("/api/auth/sign-in", {
-        method: "POST",
+      dispatch(signInStart());
+      const res = await fetch('/api/auth/signin', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(signInData),
+        body: JSON.stringify(formData),
       });
       const data = await res.json();
       console.log(data);
@@ -33,53 +37,45 @@ function SignIn() {
         return;
       }
       dispatch(signInSuccess(data));
-      navigate("/");
+      navigate('/');
     } catch (error) {
       dispatch(signInFailure(error.message));
     }
-
-    console.log("Sumit button is clicked");
   };
-
   return (
-    <div className=" p-3 max-w-lg mx-auto">
-      <h1 className="text-3xl text-center my-7 font-semibold "> SIGN-IN</h1>
-      <form
-        className="flex flex-col gap-4 rounded-lg p-4 "
-        onSubmit={(e) => handleOnSubmit(e)}
-      >
+    <div className='p-3 max-w-lg mx-auto'>
+      <h1 className='text-3xl text-center font-semibold my-7'>Sign In</h1>
+      <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
         <input
-          className="border p-2 rounded-lg "
-          type="email"
-          placeholder="EMAIL"
-          id="email"
-          onChange={handleInput}
+          type='email'
+          placeholder='email'
+          className='border p-3 rounded-lg'
+          id='email'
+          onChange={handleChange}
         />
         <input
-          className="border p-2 rounded-lg "
-          type="password"
-          placeholder="PASSWORD"
-          id="password"
-          onChange={handleInput}
+          type='password'
+          placeholder='password'
+          className='border p-3 rounded-lg'
+          id='password'
+          onChange={handleChange}
         />
-        <button className="border text-lg p-3 rounded-lg text-white bg-lime-700 hover:bg-lime-600 active:bg-red-950">
-          {" "}
-          SIGN-IN
+
+        <button
+          disabled={loading}
+          className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80'
+        >
+          {loading ? 'Loading...' : 'Sign In'}
         </button>
-
-        <OAuth />
+        <OAuth/>
       </form>
-
-      <div className="flex gap-2 px-6">
-        <p>New User?</p>
-        <Link to="/sign-up">
-          <span className="text-blue-600">Register Now</span>
+      <div className='flex gap-2 mt-5'>
+        <p>Dont have an account?</p>
+        <Link to={'/sign-up'}>
+          <span className='text-blue-700'>Sign up</span>
         </Link>
       </div>
-
-      <div className="text-red-700 px-6 my-2">{error && <p>{error}</p>}</div>
+      {error && <p className='text-red-500 mt-5'>{error}</p>}
     </div>
   );
 }
-
-export default SignIn;

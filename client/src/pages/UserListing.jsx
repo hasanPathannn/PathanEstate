@@ -58,7 +58,7 @@ const UserListing = () => {
           {userListings.map((listing) => (
             <Link
               key={listing._id}
-              className="text-slate-700 font-semibold w-4/12 h-4/12  flex-auto flex-wrap"
+              className="text-slate-700 font-semibold flex-auto flex-wrap"
               to={`/listing/${listing._id}`}
             >
               <div className="overflow-hidden rounded-lg border border-gray-100 bg-white shadow-sm dark:border-gray-800 dark:bg-slate-900 dark:shadow-gray-700/25">
