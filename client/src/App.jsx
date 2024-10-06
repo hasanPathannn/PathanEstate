@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, HashRouter } from 'react-router-dom';
 import Home from './pages/Home';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
@@ -13,7 +13,7 @@ import Privateroute from './components/Private';
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Header />
       <Routes>
         <Route path='/' element={<Home />} />
@@ -32,6 +32,6 @@ export default function App() {
           />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
